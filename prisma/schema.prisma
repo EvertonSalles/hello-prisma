@@ -12,4 +12,15 @@ model User {
   name  String
   email String
   age   Int
+  password String
+  animes Anime[]
 }
+
+model Anime {
+  id String @id @default(uuid())
+  title String
+  genre String
+  userId String
+  user User @relation(fields: [userId], references: [id])
+}
+

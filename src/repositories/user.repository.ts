@@ -1,7 +1,7 @@
 import {prisma} from '../../database/prisma.js';
 
 export async function findAllUsers(){
-   return prisma.user.findMany()
+   return prisma.user.findMany() 
 }
 
 export async function createUser(name:string, email:string,age:number){
@@ -23,7 +23,7 @@ export async function updateUser(
    }
 ){
    return prisma.user.update({
-      where: {id},
+      where: {id}, 
       data,
    })
 }

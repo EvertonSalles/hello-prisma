@@ -1,10 +1,11 @@
-import type { Request, Response } from 'express';
+import type { Request, Response } from 'express'; 
 import * as userService from '../services/user.services.js'
-import { error } from 'node:console';
+import type { CreateUserDTO } from '../dtos/user.dto.js';
+
 
 export async function list(req:Request, res:Response) {
     try{
-        const users = await userService.listUsers()
+        const users = await userService.listUsers() 
         return res.json(users)
     }catch{
         return res.status(500).json({error: 'Erro ao listar usuario'})
@@ -13,13 +14,13 @@ export async function list(req:Request, res:Response) {
 
 export async function createUser(req:Request, res:Response){
     try{
-        const{name, email, age} = req.body
+        const data: CreateUserDTO = req.body
 
-        const user = await userService.createUser(name,email,age)
+        const user = await userService.createUser(data)
 
-        return res.status(201).json(user)
+        return res.status(201).json(user) 
     }catch(error: any){
-        return res.status(400).json({error: error.message})
+        return res.status(400).json({error: error.message}) 
     }
 }
 
@@ -58,3 +59,5 @@ export async function remove(req: Request, res: Response) {
     return res.status(400).json({ error: error.message })
   }
 }
+
+
