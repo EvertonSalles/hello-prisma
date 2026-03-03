@@ -4,12 +4,17 @@ export async function findAllUsers(){
    return prisma.user.findMany() 
 }
 
-export async function createUser(name:string, email:string,age:number){
+export async function findUserByEmail (email:string){
+   return prisma.user.findUnique({where: {email}});
+}
+
+export async function createUser(name:string, email:string,age:number, password:string){
    return prisma.user.create({
       data:{
          name,
          email,
-         age
+         age,
+         password
       },
    })
 }

@@ -5,6 +5,7 @@ export interface CreateUserDTO{
     password:string
 }
 
+
 export type UpdateUserDTO = Partial<CreateUserDTO>
 
 export interface UserResponseDTO{
@@ -13,3 +14,4 @@ export interface UserResponseDTO{
     email:string
     age:number
 }
+

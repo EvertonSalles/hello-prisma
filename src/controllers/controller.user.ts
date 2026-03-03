@@ -3,6 +3,16 @@ import * as userService from '../services/user.services.js'
 import type { CreateUserDTO } from '../dtos/user.dto.js';
 
 
+export async function login(req: Request, res:Response) {
+    try{
+        const {email, password} = req.body;
+        const result = await userService.loginUser(email, password);
+        return res.json(result);
+    }catch (error: any){
+        return res.status(401).json({error: error.message});
+    }
+}
+
 export async function list(req:Request, res:Response) {
     try{
         const users = await userService.listUsers() 
@@ -27,7 +37,7 @@ export async function createUser(req:Request, res:Response){
 export async function updateUser(req:Request, res:Response){
     try{
         const {id} = req.params
-        const {name,email,age} = req.body
+        const {name,email,age, password} = req.body
 
         if(!id || typeof id !== 'string'){
             return res.status(400).json({error: 'Id invalido'})
@@ -37,6 +47,7 @@ export async function updateUser(req:Request, res:Response){
             name,
             email,
             age,
+            password
         })
     
     return res.json(user)
