@@ -4,7 +4,7 @@ import { authMiddleware } from '../middlewares/auth.middleware.js';
 
 const bookRouter = Router();
 
-
+bookRouter.get('/books', bookController.list);
 bookRouter.post('/books', authMiddleware, bookController.create);
 
 export default bookRouter;

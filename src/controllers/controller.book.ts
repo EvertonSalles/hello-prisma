@@ -16,6 +16,12 @@ export async function create(req: Request, res: Response) {
     }
 }
 
+
+export async function list(req: Request, res: Response){
+  const books = await bookService.listBooks()
+  return res.json(books);
+}
+
 export async function remove(req: Request, res: Response) {
   try {
     const { id } = req.params; 

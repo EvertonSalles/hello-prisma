@@ -4,6 +4,12 @@ export async function findAllUsers(){
    return prisma.user.findMany() 
 }
 
+export async function findUserByID(id: string){
+   return prisma.user.findUnique({
+      where: {id}
+   })
+}
+
 export async function findUserByEmail (email:string){
    return prisma.user.findUnique({where: {email}});
 }

@@ -22,6 +22,16 @@ export async function list(req:Request, res:Response) {
     }
 }
 
+export async function listId(req:Request, res:Response){
+    const { id } = req.params
+    if(!id || typeof id !== 'string'){
+        return res.status(401).json({error: 'Id é obrigatorio e deve ser string'})
+    }
+    
+    const user = await userService.listUsersById(id)
+    return res.json(user)
+}
+
 export async function createUser(req:Request, res:Response){
     try{
         const data: CreateUserDTO = req.body

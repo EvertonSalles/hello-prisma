@@ -9,6 +9,10 @@ export async function listUsers(){
     return userRepository.findAllUsers()
 }
 
+export async function listUsersById(id:string){
+    return userRepository.findUserByID(id)
+}
+
 export async function createUser(data:CreateUserDTO): Promise<UserResponseDTO>{
     
     const {name, email, age, password} = data

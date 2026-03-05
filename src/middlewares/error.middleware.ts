@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
+import { AppError } from "../erros/AppError.js";
 
 export const errorMiddleware = (
     error: Error,
@@ -6,11 +7,19 @@ export const errorMiddleware = (
     res: Response,
     next: NextFunction
 ) => {
-    const statusCode = error.message.includes('não encontrado') ? 404 : 400;
 
-    console.error(`[Erro]: ${error.message}`);
+    if (error instanceof AppError) {
+    return res.status(error.statusCode).json({
+      status: 'error',
+      message: error.message,
+    });
+  }
 
-    return res.status(statusCode).json({
-        message: error.message || 'Erro interno do servidor'
-    })
+  console.error(error);
+  return res.status(500).json({
+    status: 'error',
+    message: 'Internal server error',
+  });
+  
+
 }

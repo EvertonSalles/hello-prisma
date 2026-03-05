@@ -10,6 +10,10 @@ export async function createBook(title: string, author: string, userId: string) 
     });
 }
 
+export async function findAllBooks(){
+      return prisma.book.findMany() 
+}
+
 export async function findBooksByUser(userId: string) {
     return prisma.book.findMany({
         where: { userId }
